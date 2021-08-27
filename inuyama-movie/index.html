@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Hiragino Mincho ProN'; color: #000000; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Hiragino Mincho ProN'; font-kerning: none}
+    span.s3 {font: 12.0px Times; font-kerning: none}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;form onsubmit="sendChatData();return false"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;table summary="</span><span class="s2">送信フォーム</span><span class="s1">"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;tbody&gt;&lt;tr&gt;&lt;th style="width:150px"&gt;</span><span class="s2">名前</span><span class="s1">(10</span><span class="s2">文字以内</span><span class="s1">)&lt;/th&gt;&lt;td&gt;&lt;input type="text" name="name" value="&lt;?=@$name?&gt;" style="width:100%" maxlength="10" required=""&gt;&lt;/td&gt;&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1">&lt;tr&gt;&lt;th&gt;</span><span class="s2">文章</span><span class="s1">(50</span><span class="s2">文字以内</span><span class="s1">)&lt;/th&gt;&lt;td&gt;&lt;input type="text" name="text" value="" style="width:100%" maxlength="50" required=""&gt;&lt;/td&gt;&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/tbody&gt;&lt;/table&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p&gt;&lt;input type="submit" value="</span><span class="s2">送信</span><span class="s1">" class="button"&gt;&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/form&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;table summary="</span><span class="s2">チャット</span><span class="s1">"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;tbody&gt;&lt;tr&gt;&lt;th style="width:150px"&gt;</span><span class="s2">名前</span><span class="s1">&lt;/th&gt;&lt;th style="width:180px"&gt;</span><span class="s2">投稿日時</span><span class="s1">&lt;/th&gt;&lt;th&gt;</span><span class="s2">文章</span><span class="s1">&lt;/th&gt;&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/tbody&gt;&lt;tbody id="board"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;!--?foreach($_chat as $val){?--&gt;</span></p>
+<p class="p1"><span class="s1">&lt;tr&gt;&lt;td&gt;&lt;!--?=htmlspecialchars($val["name"])?--&gt;&lt;/td&gt;&lt;td&gt;&lt;!--?=substr($val["date"],5,14)?--&gt;&lt;/td&gt;&lt;td&gt;&lt;!--?=htmlspecialchars($val["text"])?--&gt;&lt;/td&gt;&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1">&lt;!--?}?--&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/tbody&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/table&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script type="text/javascript"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">名前か文章にカーソルをフォーカス</span></p>
+<p class="p1"><span class="s1">if(document.getElementsByName("text")[0]) document.getElementsByName("text")[0].focus();</span></p>
+<p class="p1"><span class="s1">if(document.getElementsByName("name")[0]) document.getElementsByName("name")[0].focus();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// xmlHttpObject</span><span class="s2">の作成</span></p>
+<p class="p1"><span class="s1">function createXMLHttpRequest(){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>var xmlHttpObject = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>if(window.XMLHttpRequest){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>xmlHttpObject = new XMLHttpRequest();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>}else if(window.ActiveXObject){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>try{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>xmlHttpObject = new ActiveXObject("Msxml2.XMLHTTP");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}catch(e){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>try{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>xmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}catch(e){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>return null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>return xmlHttpObject;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">チャットの内容の取得</span></p>
+<p class="p1"><span class="s1">function loadChatData(){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject = createXMLHttpRequest();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.onreadystatechange = displayHtml;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.open("GET","/loadChatData.php",true);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.send(null);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">新たな書き込みがあった場合に表示する</span></p>
+<p class="p1"><span class="s1">function displayHtml(){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>if((xmlHttpObject.readyState == 4) &amp;&amp; (xmlHttpObject.status == 200) &amp;&amp; xmlHttpObject.responseText){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>document.getElementById("board").innerHTML = xmlHttpObject.responseText + document.getElementById("board").innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>}</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">チャットに書き込みをする</span></p>
+<p class="p1"><span class="s1">function sendChatData(){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject = createXMLHttpRequest();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.open("POST","/sendChatData.php",true);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.setRequestHeader("Content-Type","application/x-www-form-urlencoded");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>xmlHttpObject.send("name="+encodeURIComponent(document.getElementsByName("name")[0].value)+"&amp;text="+encodeURIComponent(document.getElementsByName("text")[0].value));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>document.getElementsByName("text")[0].value = "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>loadChatData();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// 2</span><span class="s1">秒ごとにチャットの内容を取りに行く</span></p>
+<p class="p1"><span class="s1">setInterval('loadChatData()',2000);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">loadChatData.php</span></p>
+<p class="p1"><span class="s1">&lt;!--?</span></p>
+<p class="p1"><span class="s1">if(!isset($_SESSION)) session_start();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">キャッシュを取らないように</span></p>
+<p class="p1"><span class="s1">header("Expires: Thu, 01 Dec 1994 16:00:00 GMT");</span></p>
+<p class="p1"><span class="s1">header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");</span></p>
+<p class="p1"><span class="s1">header("Cache-Control: no-cache, must-revalidate");</span></p>
+<p class="p1"><span class="s1">header("Cache-Control: post-check=0, pre-check=0",false);</span></p>
+<p class="p1"><span class="s1">header("Pragma: no-cache");</span></p>
+<p class="p1"><span class="s1">header("Content-type: text/html; charset=utf-8");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">$max_chid = isset($_SESSION["max_chid"]) ? $_SESSION["max_chid"] : 0 ;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">チャットの内容の取得</span></p>
+<p class="p1"><span class="s1">$_chat = array();</span></p>
+<p class="p1"><span class="s1">$rst = mysql_query("select * from chat where chid --&gt; {$max_chid} order by date desc limit 30");</span></p>
+<p class="p1"><span class="s1">while($col=mysql_fetch_assoc($rst)) $_chat[$col["chid"]] = $col;</span></p>
+<p class="p1"><span class="s1">mysql_free_result($rst);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// </span><span class="s2">直近の</span><span class="s1">ID</span></p>
+<p class="p1"><span class="s1">$_SESSION["max_chid"] = count($_chat) ? max(array_keys($_chat)) : $max_chid ;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s3">// </span><span class="s1">チャットデータの書き出し</span></p>
+<p class="p1"><span class="s1">foreach($_chat as $val){?&amp;gt;</span></p>
+<p class="p1"><span class="s1">&lt;!--?=htmlspecialchars($val["name"])?--&gt;&lt;!--?=substr($val["date"],5,14)?--&gt;&lt;!--?=htmlspecialchars($val["text"])?--&gt;</span></p>
+<p class="p1"><span class="s1">&lt;!--?}?--&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;&lt;/html&gt;</span></p>
+</body>
+</html>
