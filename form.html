@@ -1,0 +1,30 @@
+<html class=""><head></head><body><form action="confirm.php" method="post">
+名前：<input type="text" name="yourname"><br>
+<p>性別を選択</p>
+<input id="male" type="radio" name="sex" value="male"><label for="male">男性</label>
+<input id="female" type="radio" name="sex" value="female"><label for="female">女性</label><br>
+<label for="num">年齢：</label>
+<input id="num" type="number" name="yoyaku-num"><br>
+<label for="mail">メールアドレス：</label>
+<input id="mail" type="email" name="mail"><br>
+携帯電話番号（ハイフン不要）<input type="text" name="yourname"><br>
+肩書き：<select name="sushi">
+  <option value="magro">クールな</option>
+  <option value="ika">キュートな</option>
+  <option value="ebi">紳士な</option>
+  <option value="ebi">VIPな</option>
+  <option value="ebi">ケチな</option>
+  <option value="ebi">魔法使い</option>
+  <option value="ebi">魔法少女</option>  
+  <option value="ebi">破壊神</option>    
+</select>
+<div>
+    生年月日
+      <input type="date" name="dob">
+    
+  </div>
+<label for="comment">コメント</label>
+<textarea id="comment" name="comment" placeholder="ここには自由にコメントを記入してください"></textarea><br><br>
+<input type="submit" value="送信する"> <input type="reset" value="リセットする">    
+</form>
+</body></html>
